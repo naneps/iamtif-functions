@@ -11,11 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies and build
+      - name: Install dependencies
         run: |
           cd functions
           npm ci
-          npm run build
+
+      - name: Deploy Firebase functions
+        run: |
+          cd functions
+          npm run deploy
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
