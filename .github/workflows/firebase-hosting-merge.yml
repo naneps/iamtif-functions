@@ -27,4 +27,4 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_IAMTIF }}"
           channelId: live
-          projectId: iamtif
+          projectId: "${{ secrets.FIREBASE_PROJECT_ID }}"
