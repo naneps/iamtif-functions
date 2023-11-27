@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
+
 exports.sendNotificationOnNewPost = functions.firestore
     .document("posts/{postId}")
     .onCreate(async (snapshot, context) => {
@@ -20,6 +21,7 @@ exports.sendNotificationOnNewPost = functions.firestore
 
       const results = response.results;
       const tokensToRemove = [];
+
       results.forEach((result, index) => {
         const error = result.error;
         if (error) {
