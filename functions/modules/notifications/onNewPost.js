@@ -1,12 +1,11 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
-
 exports.sendNotificationOnNewPost = functions.firestore
     .document("posts/{postId}")
     .onCreate(async (snapshot, context) => {
       const postData = snapshot.data();
-
+      functions.logger.log("postData", postData);
       const payload = {
         notification: {
           title: "New Post",
@@ -15,8 +14,8 @@ exports.sendNotificationOnNewPost = functions.firestore
       };
 
       const tokensSnapshot = await admin.firestore().collection("users").get();
-      const tokens = tokensSnapshot.docs.map((doc) => doc.data().fcmToken);
-
+      const tokens = tokensSnapshot.docs.map((doc) => doc.data().fcm.token );
+      functions.logger.log("tokens", tokens);
       const response = await admin.messaging().sendToDevice(tokens, payload);
 
       const results = response.results;

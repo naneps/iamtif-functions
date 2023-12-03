@@ -7,7 +7,6 @@ exports.sendNotificationOnNewComment = functions.firestore
       const commentData = snapshot.data();
       const postId = commentData.postId;
 
-      // Get the post data
       const postSnapshot = await admin
           .firestore()
           .collection("posts")
